@@ -1,8 +1,17 @@
-# SILVA VISION
+<p align="center">
+  <img src="assets/silva-vision-banner.svg" alt="Silva Vision — banner" width="100%">
+</p>
 
-**FiveM / GTA V — visual mod project**
+<h1 align="center">SILVA VISION</h1>
 
-`v0.2.0-dev`  |  `PT-BR`  |  `Experimental`
+<p align="center">
+  <strong>FiveM / GTA V — visual mod project</strong><br>
+  Realismo sem exagero.
+</p>
+
+<p align="center">
+  <code>v0.2.0-dev</code> · <code>PT-BR</code> · <code>Experimental</code>
+</p>
 
 ---
 
@@ -22,6 +31,7 @@ silva-vision/
 ├── world/       # ambiente e iluminação
 ├── tools/       # validação e instalação
 ├── docs/        # especificações e testes
+├── assets/      # identidade visual
 └── .github/     # fluxo do projeto
 ```
 
@@ -74,5 +84,7 @@ Veja `docs/` para arquitetura, qualidade, compatibilidade, instalação e testes
 
 ---
 
-### SILVA VISION
-**Realismo sem exagero.**
+<p align="center">
+  <strong>SILVA VISION</strong><br>
+  Realismo sem exagero.
+</p>
