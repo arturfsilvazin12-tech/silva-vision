@@ -1,228 +1,78 @@
-# 🇧🇷✨ SILVA VISION
+# SILVA VISION
 
-<div align="center">
+**FiveM / GTA V — visual mod project**
 
-## 🎮 Realismo • Atmosfera • Iluminação • Performance
-
-### Projeto gráfico modular para FiveM / GTA V
-
-**Construído em PT-BR com foco em qualidade visual, desempenho e compatibilidade.**
-
-`0.1.0-dev` · 🟡 Experimental
-
-</div>
+`v0.2.0-dev`  |  `PT-BR`  |  `Experimental`
 
 ---
 
-## 👋 Bem-vindo
+## Sobre
 
-O **Silva Vision** busca criar uma identidade visual própria para FiveM/GTA V sem depender de uma pilha de filtros exagerados.
+O Silva Vision é uma base gráfica modular criada para buscar uma imagem mais natural, atmosférica e cinematográfica sem exagerar nos filtros.
 
-A arquitetura separa **Post FX, World, Performance, Validation e Release**, permitindo desenvolver e testar cada parte isoladamente.
+**Foco:** iluminação · atmosfera · clima · água · veículos · pós-processamento · desempenho.
 
-> 🎯 **Regra principal:** um efeito só entra no preset padrão se melhorar a imagem, justificar seu custo e continuar reversível.
-
----
-
-## ✨ O projeto
-
-| Sistema | Foco |
-|:--|:--|
-| 🎨 **Post FX** | cor, exposição, tonemap, contraste, bloom e nitidez |
-| 💡 **Lighting** | iluminação urbana e fontes artificiais |
-| 🌫️ **Atmosphere** | profundidade, haze e neblina |
-| 🌧️ **Weather** | identidade visual por clima |
-| 🌊 **Water** | água, reflexos e wetness |
-| 🚘 **Vehicles** | iluminação e presença dos veículos |
-| ⚡ **Performance** | perfis e orçamento gráfico |
-| 🛡️ **Validation** | testes, benchmark e rollback |
-
----
-
-## 🏗️ Arquitetura
+## Estrutura
 
 ```text
-                         🇧🇷 SILVA VISION
-                                │
-             ┌──────────────────┼──────────────────┐
-             ▼                  ▼                  ▼
-         🌎 WORLD           🎨 POST FX        ⚡ PERFORMANCE
-             │                  │                  │
-      ┌──────┼──────┐      ┌────┼────┐        Profiles
-      ▼      ▼      ▼      ▼    ▼    ▼        GPU Budget
-     💡     🌧️     🌫️    🎨   ✨   🔍
-    Luz   Clima  Atmos   Cor Bloom Sharp
-      │      │      │
-      └──────┼──────┘
-             ▼
-          🌊 Water
-             ▼
-        🚘 Vehicles
-             │
-             ▼
-        🧪 Validation
-             │
-             ▼
-          📦 Release
+silva-vision/
+├── core/        # parâmetros e lógica visual
+├── presets/     # perfis de imagem
+├── shaders/     # shaders
+├── world/       # ambiente e iluminação
+├── tools/       # validação e instalação
+├── docs/        # especificações e testes
+└── .github/     # fluxo do projeto
 ```
 
-### 📊 Estado
+## Perfis
 
-| Componente | Estado |
-|:--|:--:|
-| 🎨 ReShade Core | 🟡 Desenvolvimento |
-| 🎛️ Presets | 🟡 Desenvolvimento |
-| 💡 Lighting | 🟡 Especificação |
-| 🌫️ Atmosphere | 🟡 Especificação |
-| 🌧️ Weather | 🟡 Planejamento |
-| 🌊 Water | 🟡 Especificação |
-| 🚘 Vehicles | 🟡 Planejamento |
-| ⚡ Performance | 🟢 Estruturado |
-| 🛡️ Validation | 🟢 Ferramentas iniciais |
-| 📦 Installer | 🟡 Preparação |
-| 🧪 Teste real | 🔴 Pendente |
-| 🏁 Release estável | 🔴 Não lançado |
+| Perfil | Objetivo |
+|---|---|
+| Performance | maior margem de FPS |
+| Balanced | equilíbrio entre imagem e custo |
+| Quality | qualidade visual elevada |
+| Cinematic | captura e vídeo |
 
----
-
-## 🎛️ Perfis
-
-🟢 **Performance** — FPS e estabilidade  
-⚖️ **Balanced** ⭐ — equilíbrio recomendado  
-🔵 **Quality** — qualidade visual  
-🟣 **Ultra** — avaliação máxima  
-🎬 **Cinematic** — vídeos e screenshots
-
-> ⚠️ Ultra não significa ligar tudo. Os efeitos precisam ser validados.
-
----
-
-## 🧪 Metodologia
+## Como desenvolvemos
 
 ```text
-🔎 Pesquisa
+PESQUISA
    ↓
-🛠️ Implementação
+IMPLEMENTAÇÃO
    ↓
-🎛️ A/B
+TESTE ISOLADO
    ↓
-📈 Benchmark
+A/B + BENCHMARK
    ↓
-👁️ Análise
+CORREÇÃO
    ↓
-🐛 Correção
-   ↓
-🔁 Repetição
-   ↓
-📦 Release
+RELEASE
 ```
 
-Testes previstos: ☀️ Dia · 🌅 Sunset · 🌙 Noite · 🌧️ Chuva · 🌧️🌙 Chuva noturna · 🌆 Cidade · 🚘 Faróis · 🌊 Água · 🌫️ Neblina.
+Nada é chamado de **estável** antes de ser testado no ambiente-alvo.
+
+## Regras
+
+- Não inventar formatos de arquivos nativos.
+- Não renomear arquivos nativos sem validação.
+- Não prometer ganho de FPS sem benchmark.
+- Não distribuir assets de terceiros sem licença.
+- Manter componentes experimentais separados.
+- Sempre prever rollback quando houver alteração de instalação.
+
+## Status
+
+**Base:** em reconstrução  
+**Presets:** experimentais  
+**Integração FiveM:** aguardando teste real  
+**Release estável:** não lançado
+
+## Documentação
+
+Veja `docs/` para arquitetura, qualidade, compatibilidade, instalação e testes.
 
 ---
 
-## 🛡️ Compatibilidade primeiro
-
-- ❌ Não inventar formatos nativos.
-- ❌ Não renomear arquivos nativos sem validação.
-- ❌ Não prometer FPS sem benchmark.
-- ❌ Não incluir assets de terceiros sem licença.
-- ✅ Backup e rollback.
-- ✅ Experimental separado de estável.
-- ✅ Testes isolados.
-- ✅ Dependências documentadas.
-
-**Citizen, VisualSettings, Timecycle, ReShade e ENB são camadas diferentes.**
-
----
-
-## 📦 Instalação
-
-A instalação final depende da validação no PC.
-
-**💾 Backup → 🎨 ReShade → 🧠 Core → 🎛️ Preset → 🌎 World → 🧪 Teste → 🚀 Release**
-
-Ferramentas:
-
-```text
-SV_VALIDATE.ps1
-└─ 🔍 verifica a estrutura
-
-SV_INSTALL_PLAN.ps1
-└─ 📄 prepara relatório sem alterar GTA/FiveM
-```
-
----
-
-## 📚 Documentação
-
-- 🧠 `docs/ARCHITECTURE_V02.md`
-- 🛡️ `docs/QUALITY_RULES_PTBR.md`
-- ⚡ `performance/SV_PROFILES.md`
-- 🧪 `tools/TEST_CHECKLIST_PTBR.md`
-- 📦 `tools/INSTALL_ORDER_PTBR.md`
-- 💡 `world/lighting/SV_LIGHTING_SPEC_V01.md`
-- 🌫️ `world/atmosphere/SV_ATMOSPHERE_SPEC_V01.md`
-- 🌊 `world/water/SV_WATER_SPEC_V01.md`
-- 🌅 `world/timecycle/SV_TIMECYCLE_PLAN_V01.md`
-- 🌧️ `world/weather/SV_WEATHER_MATRIX_V01.md`
-
-### 📋 Histórico
-
-Os arquivos `MEGA_UPDATE_V*` registram as principais rodadas de evolução.
-
----
-
-## 🗺️ Roadmap
-
-### 🟢 Base
-
-- [x] 🧠 Arquitetura modular
-- [x] 🇧🇷 Documentação PT-BR
-- [x] ⚡ Perfis de performance
-- [x] 🛡️ Validador
-- [x] 📦 Preparador de instalação
-- [x] 🌎 Especificações World
-- [x] 📊 Manifesto
-- [x] 🎨 README profissional
-
-### 🟡 Desenvolvimento
-
-- [ ] 🎨 Pipeline ReShade final
-- [ ] 🎛️ Presets finais
-- [ ] 💡 Lighting real
-- [ ] 🌫️ Atmosphere real
-- [ ] 🌊 Water real
-- [ ] 🌧️ Weather real
-- [ ] 🚘 Vehicle Lights
-- [ ] 🛡️ Rollback completo
-- [ ] 📦 Installer completo
-
-### 🔴 Validação
-
-- [ ] 🧪 Primeiro teste FiveM
-- [ ] 📈 Benchmark
-- [ ] 👁️ Antes/depois
-- [ ] 🐛 Correção de artefatos
-- [ ] 🧪 Estabilidade
-- [ ] 🏁 Release estável
-
----
-
-## 📦 Tamanho
-
-Ainda não há tamanho final. A meta é **não adicionar gigabytes sem necessidade**. A estimativa será atualizada quando os assets finais forem definidos.
-
----
-
-<div align="center">
-
-## 🔥 SILVA VISION
-
-### Realismo sem exagero.
-### Qualidade sem desperdício.
-### Compatibilidade antes de tudo.
-
-🇧🇷 **Feito para evoluir.**
-
-</div>
+### SILVA VISION
+**Realismo sem exagero.**
