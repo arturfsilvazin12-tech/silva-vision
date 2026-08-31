@@ -1,0 +1,13 @@
+{
+  "nome": "Silva Vision",
+  "idioma": "pt-BR",
+  "versao": "0.1.0-dev",
+  "status": "experimental",
+  "componentes": {
+    "reshade": true,
+    "world": "planejado",
+    "assets": "planejado",
+    "installer": "preparacao"
+  },
+  "regra": "nenhum componente nativo e considerado estavel sem validacao"
+}
