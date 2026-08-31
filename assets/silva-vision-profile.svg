@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+<defs>
+  <radialGradient id="bg" cx="50%" cy="45%" r="70%"><stop offset="0" stop-color="#ff3d9a"/><stop offset=".48" stop-color="#7b1fa2"/><stop offset="1" stop-color="#090912"/></radialGradient>
+  <linearGradient id="sun" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffb13b"/><stop offset=".55" stop-color="#ff4f9a"/><stop offset="1" stop-color="#8c4cff"/></linearGradient>
+  <linearGradient id="pink" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#fff"/><stop offset=".58" stop-color="#ffd6ec"/><stop offset="1" stop-color="#ff2d9b"/></linearGradient>
+  <filter id="glow"><feGaussianBlur stdDeviation="12" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="1000" height="1000" rx="180" fill="#07070d"/>
+<circle cx="500" cy="500" r="405" fill="url(#bg)"/>
+<circle cx="500" cy="500" r="390" fill="none" stroke="#ff3da8" stroke-width="12" filter="url(#glow)"/>
+<circle cx="500" cy="390" r="155" fill="url(#sun)" opacity=".9"/>
+<path d="M105 600 Q500 390 895 600 L895 720 Q500 560 105 720Z" fill="#11111c" opacity=".65"/>
+<g fill="#11111a" opacity=".9">
+ <path d="M175 535V335l-45 38-20-25 82-78 82 78-20 25-45-38v200z"/>
+ <path d="M805 535V335l45 38 20-25-82-78-82 78 20 25 45-38v200z"/>
+</g>
+<path d="M235 675 Q300 575 420 575 L580 575 Q700 575 765 675 L720 725 Q500 770 280 725Z" fill="#080811" stroke="#ff3da8" stroke-width="7"/>
+<path d="M325 650 Q370 600 430 600 H570 Q630 600 675 650" fill="none" stroke="#ffd15c" stroke-width="7"/>
+<path d="M300 700 H700" stroke="#ff426f" stroke-width="10"/>
+<text x="500" y="440" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="112" font-weight="900" font-style="italic" fill="url(#pink)" stroke="#0a0a12" stroke-width="7" paint-order="stroke">SILVA</text>
+<text x="500" y="545" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="120" font-weight="900" font-style="italic" fill="#ff2d9b" stroke="#0a0a12" stroke-width="8" paint-order="stroke">VISION</text>
+<text x="500" y="830" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="30" font-weight="700" letter-spacing="9" fill="#fff">GRAPHICS • FIVEM</text>
+</svg>
