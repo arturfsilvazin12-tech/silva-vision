@@ -1,0 +1,18 @@
+# 🇧🇷 SILVA VISION — VISUALSETTINGS BASE
+# 🧪 Estrutura experimental / NÃO INSTALAR AINDA
+# Este arquivo é um manifesto de parâmetros que serão validados antes de virar
+# um visualsettings.dat compatível. Não contém valores de terceiros.
+#
+# ÁREAS PLANEJADAS:
+# lighting
+# headlights
+# vehicle interior lights
+# emissive
+# street lights
+# rain
+# particles
+# water
+# reflections
+# shadows
+#
+# REGRA: só migrar parâmetros para arquivo de jogo depois da validação.
