@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="500" viewBox="0 0 1600 500">
+<defs>
+ <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#080612"/><stop offset=".48" stop-color="#3b0b48"/><stop offset="1" stop-color="#ff176f"/></linearGradient>
+ <linearGradient id="road" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#180d24"/><stop offset="1" stop-color="#030309"/></linearGradient>
+ <filter id="glow"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <linearGradient id="pink" x1="0" x2="1"><stop stop-color="#fff"/><stop offset=".55" stop-color="#ff77c7"/><stop offset="1" stop-color="#ff177f"/></linearGradient>
+</defs>
+<rect width="1600" height="500" fill="url(#sky)"/>
+<circle cx="220" cy="280" r="105" fill="none" stroke="#ff5eb8" stroke-width="5" opacity=".55"/>
+<circle cx="220" cy="280" r="82" fill="none" stroke="#ffb1df" stroke-width="2" opacity=".45"/>
+<path d="M0 335 Q350 270 690 330 T1600 290 V500 H0Z" fill="url(#road)"/>
+<g opacity=".72" fill="#0a0712"><rect x="840" y="160" width="70" height="180"/><rect x="925" y="105" width="55" height="235"/><rect x="995" y="145" width="90" height="195"/><rect x="1100" y="85" width="68" height="255"/><rect x="1185" y="125" width="92" height="215"/><rect x="1295" y="65" width="80" height="275"/><rect x="1390" y="135" width="95" height="205"/></g>
+<g fill="#ff62c0" opacity=".8"><circle cx="865" cy="190" r="3"/><circle cx="945" cy="145" r="3"/><circle cx="1020" cy="180" r="3"/><circle cx="1120" cy="120" r="3"/><circle cx="1210" cy="165" r="3"/><circle cx="1320" cy="105" r="3"/><circle cx="1420" cy="175" r="3"/></g>
+<g filter="url(#glow)" fill="none" stroke="#ff2f9b" stroke-width="3"><path d="M0 390 L650 355"/><path d="M900 350 L1600 390"/></g>
+<g opacity=".7" stroke="#ffb2df" stroke-width="2"><path d="M70 70 Q120 20 170 70"/><path d="M95 70 Q120 0 145 70"/><path d="M1350 55 Q1400 5 1450 55"/><path d="M1375 55 Q1400 0 1425 55"/></g>
+<text x="80" y="112" fill="#ff63bd" font-family="Arial,sans-serif" font-size="18" letter-spacing="7">FIVEM / GTA V • VISUAL MOD</text>
+<text x="80" y="220" fill="url(#pink)" font-family="Arial Black,Arial,sans-serif" font-size="108" font-weight="900" letter-spacing="-5">SILVA</text>
+<text x="80" y="315" fill="#ffffff" font-family="Arial Black,Arial,sans-serif" font-size="92" font-weight="900" letter-spacing="-4">VISION</text>
+<text x="86" y="354" fill="#e9d8e8" font-family="Arial,sans-serif" font-size="20" letter-spacing="6">REALISM • ATMOSPHERE • CONTROL</text>
+<g transform="translate(80 410)"><rect width="145" height="38" rx="19" fill="#ff197f"/><text x="72" y="25" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="14" font-weight="700" letter-spacing="2">PERFORMANCE</text><rect x="160" width="120" height="38" rx="19" fill="#201229" stroke="#ff4eaa"/><text x="220" y="25" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="14" font-weight="700" letter-spacing="2">QUALITY</text></g>
+<g transform="translate(1030 395)" fill="#fff" font-family="Arial,sans-serif"><text x="0" y="0" font-size="16" letter-spacing="3">LIGHTING</text><text x="145" y="0" font-size="16" letter-spacing="3">WEATHER</text><text x="285" y="0" font-size="16" letter-spacing="3">WATER</text><text x="390" y="0" font-size="16" letter-spacing="3">FPS</text></g>
+<path d="M1030 410H1510" stroke="#ff2c96" stroke-width="2"/>
+<text x="1030" y="445" fill="#d9bfd5" font-family="Arial,sans-serif" font-size="14" letter-spacing="3">NEXT LEVEL GRAPHICS • BUILT FOR IMMERSION</text>
+</svg>
