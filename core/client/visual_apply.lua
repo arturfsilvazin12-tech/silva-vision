@@ -1,57 +1,108 @@
--- SILVA VISION V0.5
+-- SILVA VISION V0.5 ULTRA
 -- Central Visual Apply — CLIENT ONLY
--- Aplica somente settings validados e evita extremos.
+-- Fonte única para VisualSettings validados.
+-- Nenhum parâmetro pending é escrito aqui.
 
-local Apply = { enabled = true, interval = 1500, lastStateKey = '' }
+local Apply = {
+    enabled = true,
+    interval = 1200,
+    lastStateKey = '',
+    lastProfile = '',
+}
 
-local function setValidated(name, value)
+local function safeExport(name, ...)
+    local ok, result = pcall(function()
+        return exports['silva-vision-core'][name](...)
+    end)
+    return ok and result or nil
+end
+
+local function validated(name, value)
     if type(SetVisualSettingFloat) ~= 'function' then return false end
-    local ok, valid = pcall(function() return exports['silva-vision-core']:IsVisualSettingValidated(name) end)
-    if not ok or valid ~= true then return false end
-    return pcall(SetVisualSettingFloat, name, value)
+    local ok, allowed = pcall(function()
+        return exports['silva-vision-core']:IsVisualSettingValidated(name)
+    end)
+    if not ok or allowed ~= true then return false end
+    local wrote = pcall(SetVisualSettingFloat, name, value)
+    return wrote
+end
+
+local function clamp(v, lo, hi)
+    return math.max(lo, math.min(hi, v))
 end
 
 local function getState()
-    local ok, state = pcall(function() return exports['silva-vision-core']:GetVisualPolicy() end)
-    if ok and type(state) == 'table' then return state end
-    return nil
+    return safeExport('GetVisualPolicy') or {}
+end
+
+local function getProfiles()
+    return safeExport('GetProfiles') or {}
+end
+
+local function chooseProfile(state)
+    local p = state.profile
+    if p == 'Performance' or p == 'Balanced' or p == 'Quality' or p == 'Cinematic' then
+        return p
+    end
+    if state.emergency or state.phase == 'night' then return 'Quality' end
+    return 'Balanced'
 end
 
 local function apply()
-    if not Apply.enabled then return end
+    if not Apply.enabled then return false end
     local s = getState()
-    if not s then return end
+    local profiles = getProfiles()
+    local profileName = chooseProfile(s)
+    local p = profiles[profileName] or profiles.Balanced or {
+        rain=3500.0, distantSize=1.05, distantReflection=0.85, distantUpscale=1.50
+    }
 
-    local night = s.phase == 'night' and 1.0 or 0.0
-    local wet = s.wet and 1.0 or 0.0
-    local interior = s.interior and 1.0 or 0.0
-    local emergency = s.emergency and 1.0 or 0.0
+    local night = s.phase == 'night'
+    local wet = s.wet == true
+    local storm = s.weather == 'THUNDER'
+    local interior = s.interior == true
+    local emergency = s.emergency == true
 
-    setValidated('distantlights.size', 1.05 + 0.08 * night)
-    setValidated('distantlights.sizeReflections', 0.85 + 0.08 * wet + 0.02 * night)
-    setValidated('distantlights.sizeUpscale', 1.45 + 0.15 * night)
-    setValidated('distantlights.sizeUpscaleReflections', 1.45 + 0.15 * night)
+    -- Distant lights: visibilidade noturna sem transformar cada fonte em bloom.
+    validated('distantlights.size', clamp((p.distantSize or 1.05) + (night and 0.04 or 0.0), 0.90, 1.20))
+    validated('distantlights.sizeReflections', clamp((p.distantReflection or 0.85) + (wet and 0.07 or 0.0), 0.70, 1.00))
+    validated('distantlights.sizeUpscale', clamp((p.distantUpscale or 1.50) + (night and 0.05 or 0.0), 1.10, 1.80))
+    validated('distantlights.sizeUpscaleReflections', clamp((p.distantUpscale or 1.50) + (wet and 0.05 or 0.0), 1.10, 1.80))
 
-    local rain = s.weather == 'THUNDER' and 4500.0 or (s.wet and 3500.0 or 3000.0)
-    setValidated('rain.NumberParticles', rain)
-    setValidated('rain.UseLitShader', 1.0)
-    setValidated('rain.ambient', s.wet and 0.42 or 0.35)
-    setValidated('rain.diffuse', s.wet and 1.0 or 0.90)
+    -- Chuva: mais presença em tempestade, mas sem valores extremos.
+    local rain = p.rain or 3500.0
+    if storm then rain = rain + 500.0 end
+    validated('rain.NumberParticles', clamp(rain, 2800.0, 5500.0))
+    validated('rain.UseLitShader', 1.0)
+    validated('rain.diffuse', wet and 1.00 or 0.90)
+    validated('rain.ambient', wet and (storm and 0.45 or 0.42) or 0.35)
+    validated('rain.wrapScale', 0.60)
+    validated('rain.wrapBias', 0.40)
+    validated('rain.defaultlight.red', 1.0)
+    validated('rain.defaultlight.green', 1.0)
+    validated('rain.defaultlight.blue', 1.0)
 
-    local interiorLight = interior == 1.0 and 0.90 or 1.10
-    setValidated('car.interiorlight.intensity', interiorLight)
-    setValidated('car.fatinteriorlight.intensity', interiorLight)
+    -- Interior: protege contra cabine estourada sem apagar iluminação.
+    local interiorLight = interior and 0.90 or 1.08
+    validated('car.interiorlight.intensity', interiorLight)
+    validated('car.fatinteriorlight.intensity', interiorLight)
 
-    local headlight = night == 1.0 and 1.55 or 1.45
-    if emergency == 1.0 then headlight = 1.60 end
-    setValidated('car.headlight.HDRIntensity', headlight)
-    setValidated('car.headlight.fullbeam.HDRIntensity', 1.15)
+    -- Faróis: ganho moderado à noite; emergência ganha somente um pequeno adicional.
+    local headlight = night and 1.55 or 1.45
+    if emergency then headlight = headlight + 0.05 end
+    validated('car.headlight.HDRIntensity', clamp(headlight, 1.35, 1.65))
+    validated('car.headlight.fullbeam.HDRIntensity', night and 1.18 or 1.15)
 
-    Apply.lastStateKey = table.concat({s.phase, s.weather, tostring(s.wet), tostring(s.interior), tostring(s.emergency), s.profile}, '|')
+    Apply.lastProfile = profileName
+    Apply.lastStateKey = table.concat({
+        s.phase or 'unknown', s.weather or 'unknown', tostring(wet),
+        tostring(interior), tostring(emergency), profileName
+    }, '|')
+    return true
 end
 
 CreateThread(function()
-    Wait(5500)
+    Wait(4500)
     while true do
         apply()
         Wait(Apply.interval)
@@ -59,11 +110,17 @@ CreateThread(function()
 end)
 
 RegisterCommand('svapply', function(_, args)
-    if args[1] == 'on' then Apply.enabled = true; apply()
-    elseif args[1] == 'off' then Apply.enabled = false
-    elseif args[1] == 'reapply' then apply()
-    elseif args[1] == 'show' then print('[SilvaVision] apply state=' .. Apply.lastStateKey)
-    else print('[SilvaVision] svapply on | off | reapply | show'); return end
+    local cmd = args[1]
+    if cmd == 'on' then Apply.enabled = true; apply()
+    elseif cmd == 'off' then Apply.enabled = false
+    elseif cmd == 'reapply' then apply()
+    elseif cmd == 'show' then
+        print(('[SilvaVision] Apply=%s profile=%s state=%s'):format(
+            tostring(Apply.enabled), Apply.lastProfile, Apply.lastStateKey))
+    else
+        print('[SilvaVision] svapply on | off | reapply | show')
+        return
+    end
     print(('[SilvaVision] Central Apply %s'):format(Apply.enabled and 'ON' or 'OFF'))
 end, false)
 
