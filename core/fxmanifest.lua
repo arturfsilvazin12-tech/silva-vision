@@ -11,5 +11,6 @@ client_scripts {
     'client/visual_profiles.lua',
     'client/timecycle_runtime.lua',
     'client/visual_director.lua',
-    'client/lighting_runtime.lua'
+    'client/lighting_runtime.lua',
+    'client/visual_debug.lua'
 }
