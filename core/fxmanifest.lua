@@ -20,5 +20,7 @@ client_scripts {
     'client/atmosphere_runtime.lua',
     'client/water_reflection_runtime.lua',
     'client/performance_governor.lua',
+    'client/emergency_lighting.lua',
+    'client/vfx_runtime.lua',
     'client/visual_debug.lua'
 }
