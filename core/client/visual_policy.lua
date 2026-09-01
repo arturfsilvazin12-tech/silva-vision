@@ -1,10 +1,10 @@
--- SILVA VISION V0.5
--- Visual Policy — CLIENT ONLY
--- Fonte única de decisão para os módulos runtime.
+-- SILVA VISION V0.5 MEGA ULTRA
+-- Context decision layer — CLIENT ONLY.
+-- Não escreve VisualSettings.
 
 local Policy = {
     enabled = true,
-    state = { phase = 'day', weather = 'CLEAR', wet = false, interior = false, emergency = false, profile = 'Balanced' }
+    state = { phase='day', weather='CLEAR', wet=false, interior=false, emergency=false, profile='Balanced' }
 }
 
 local function phase(h)
@@ -30,15 +30,26 @@ local function update()
     local ped = PlayerPedId()
     local w = weather()
     local emergency = false
-    if IsPedInAnyVehicle(ped, false) then emergency = GetVehicleClass(GetVehiclePedIsIn(ped, false)) == 18 end
+    if IsPedInAnyVehicle(ped, false) then
+        emergency = GetVehicleClass(GetVehiclePedIsIn(ped, false)) == 18
+    end
     Policy.state.phase = phase(GetClockHours())
     Policy.state.weather = w
     Policy.state.wet = w == 'RAIN' or w == 'THUNDER' or w == 'CLEARING'
     Policy.state.interior = GetInteriorFromEntity(ped) ~= 0
     Policy.state.emergency = emergency
-    if Policy.state.interior then Policy.state.profile = 'Balanced'
-    elseif emergency or Policy.state.phase == 'night' then Policy.state.profile = 'Quality'
-    else Policy.state.profile = 'Balanced' end
+
+    local manual = false
+    local ok, result = pcall(function() return exports['silva-vision-core']:IsProfileManual() end)
+    manual = ok and result == true
+    if not manual then
+        if Policy.state.interior then Policy.state.profile='Balanced'
+        elseif emergency or Policy.state.phase=='night' then Policy.state.profile='Quality'
+        else Policy.state.profile='Balanced' end
+    else
+        local ok2, p = pcall(function() return exports['silva-vision-core']:GetActiveProfile() end)
+        if ok2 and type(p)=='string' then Policy.state.profile=p end
+    end
 end
 
 CreateThread(function()
@@ -47,9 +58,9 @@ CreateThread(function()
 end)
 
 RegisterCommand('svpolicy', function(_, args)
-    if args[1] == 'on' then Policy.enabled = true
-    elseif args[1] == 'off' then Policy.enabled = false
-    elseif args[1] == 'show' then
+    if args[1]=='on' then Policy.enabled=true
+    elseif args[1]=='off' then Policy.enabled=false
+    elseif args[1]=='show' then
         print(('[SilvaVision] phase=%s weather=%s wet=%s interior=%s emergency=%s profile=%s'):format(
             Policy.state.phase, Policy.state.weather, tostring(Policy.state.wet), tostring(Policy.state.interior), tostring(Policy.state.emergency), Policy.state.profile))
         return
