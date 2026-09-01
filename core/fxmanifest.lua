@@ -12,5 +12,7 @@ client_scripts {
     'client/timecycle_runtime.lua',
     'client/visual_director.lua',
     'client/lighting_runtime.lua',
+    'client/lighting_director.lua',
+    'client/weather_director.lua',
     'client/visual_debug.lua'
 }
