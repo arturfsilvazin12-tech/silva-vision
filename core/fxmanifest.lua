@@ -18,5 +18,7 @@ client_scripts {
     'client/tunnel_runtime.lua',
     'client/surface_weather_runtime.lua',
     'client/atmosphere_runtime.lua',
+    'client/water_reflection_runtime.lua',
+    'client/performance_governor.lua',
     'client/visual_debug.lua'
 }
