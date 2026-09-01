@@ -7,5 +7,7 @@ description 'Silva Vision V0.5 client visual runtime layer'
 version '0.5.0-dev'
 
 client_scripts {
-    'client/visual_runtime.lua'
+    'client/visual_runtime.lua',
+    'client/visual_profiles.lua',
+    'client/timecycle_runtime.lua'
 }
