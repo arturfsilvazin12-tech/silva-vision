@@ -3,8 +3,8 @@ game 'gta5'
 
 name 'silva-vision-core'
 author 'Silva Vision'
-description 'Silva Vision V0.5 client visual runtime layer'
-version '0.5.0-dev'
+description 'Silva Vision V0.5 Ultra client visual runtime layer'
+version '0.5.0-dev-ultra'
 
 client_scripts {
     'client/client_only_guard.lua',
@@ -12,9 +12,10 @@ client_scripts {
     'client/visual_policy.lua',
     'client/fallback_runtime.lua',
     'client/visual_settings_catalog.lua',
+    'client/visual_layers.lua',
+    'client/visual_profiles.lua',
     'client/visual_apply.lua',
     'client/visual_runtime.lua',
-    'client/visual_profiles.lua',
     'client/timecycle_runtime.lua',
     'client/visual_director.lua',
     'client/lighting_runtime.lua',
@@ -29,5 +30,6 @@ client_scripts {
     'client/emergency_lighting.lua',
     'client/vfx_runtime.lua',
     'client/master_director.lua',
-    'client/visual_debug.lua'
+    'client/visual_debug.lua',
+    'client/visual_status.lua'
 }
