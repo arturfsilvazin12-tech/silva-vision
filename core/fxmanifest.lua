@@ -8,6 +8,7 @@ version '0.5.0-dev'
 
 client_scripts {
     'client/client_only_guard.lua',
+    'client/compatibility_guard.lua',
     'client/visual_policy.lua',
     'client/visual_runtime.lua',
     'client/visual_profiles.lua',
