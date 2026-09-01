@@ -14,5 +14,7 @@ client_scripts {
     'client/lighting_runtime.lua',
     'client/lighting_director.lua',
     'client/weather_director.lua',
+    'client/vehicle_lighting.lua',
+    'client/tunnel_runtime.lua',
     'client/visual_debug.lua'
 }
