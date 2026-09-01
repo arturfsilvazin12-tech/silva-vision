@@ -11,6 +11,8 @@ client_scripts {
     'client/compatibility_guard.lua',
     'client/visual_policy.lua',
     'client/fallback_runtime.lua',
+    'client/visual_settings_catalog.lua',
+    'client/visual_apply.lua',
     'client/visual_runtime.lua',
     'client/visual_profiles.lua',
     'client/timecycle_runtime.lua',
