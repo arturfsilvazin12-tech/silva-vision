@@ -9,5 +9,6 @@ version '0.5.0-dev'
 client_scripts {
     'client/visual_runtime.lua',
     'client/visual_profiles.lua',
-    'client/timecycle_runtime.lua'
+    'client/timecycle_runtime.lua',
+    'client/visual_director.lua'
 }
