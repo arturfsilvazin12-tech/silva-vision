@@ -22,5 +22,6 @@ client_scripts {
     'client/performance_governor.lua',
     'client/emergency_lighting.lua',
     'client/vfx_runtime.lua',
+    'client/master_director.lua',
     'client/visual_debug.lua'
 }
