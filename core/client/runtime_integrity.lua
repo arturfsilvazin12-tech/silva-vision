@@ -1,6 +1,5 @@
--- SILVA VISION V0.5 MEGA BLOCK 24
+-- SILVA VISION V0.5 MEGA BLOCK 25
 -- Runtime Integrity — CLIENT ONLY / DIAGNOSTIC ONLY.
--- Verifica o grafo de exports depois que todos os client_scripts carregaram.
 
 local Integrity={enabled=true,ready=false,checkedAt=0,total=0,ok=0,missing=0,state='WAITING',missingExports={}}
 local required={'GetVisualPolicy','GetProfiles','GetVisualBudget','GetVisualBudgetAdapter','GetVisualContextBridge','GetVisualFinishState','GetVisualTransitionState','GetVisualQualityContext','GetWeatherFinishState','GetAtmosphereState','GetWaterReflectionState','GetTunnelState','GetEmergencyLightingState','GetVehicleLightingConfig','GetMasterDirectorState','GetVisualApplyState','ApplyVisualSettings','GetVisualSceneState','GetVisualSunCycleState','GetVisualWeatherBlendState','GetVisualEmergencySceneState','GetVisualExposureGuardState','GetVisualReflectionDirectorState','GetVisualLightingBalanceState','GetVisualLightGovernorState','GetVisualWeatherFXState','GetVisualNightCoreState','GetVisualVehicleMaterialState','GetVisualTunnelAtmosphereState','GetVisualComposerState','GetVisualProfileDirectorState'}
