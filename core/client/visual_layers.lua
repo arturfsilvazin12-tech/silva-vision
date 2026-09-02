@@ -1,4 +1,4 @@
--- SILVA VISION V0.5 MEGA BLOCK 27
+-- SILVA VISION V0.5 MEGA BLOCK 29
 -- Visual Layer Registry — CLIENT ONLY.
 -- Prioridade explícita; somente Central Apply escreve VisualSettings.
 
@@ -10,6 +10,7 @@ local Layers={
  {name='WEATHER_BLEND',priority=25,owner='core/client/visual_weather_blend.lua'},
  {name='WEATHER_FX',priority=25,owner='core/client/visual_weather_fx.lua'},
  {name='SURFACE_RESPONSE',priority=25,owner='core/client/visual_surface_response.lua'},
+ {name='RAIN_SURFACE',priority=25,owner='core/client/visual_rain_surface_director.lua'},
  {name='ATMOSPHERE_DIRECTOR',priority=25,owner='core/client/visual_atmosphere_director.lua'},
  {name='REFLECTION_DIRECTOR',priority=25,owner='core/client/visual_reflection_director.lua'},
  {name='LIGHT_GOVERNOR',priority=25,owner='core/client/visual_light_governor.lua'},
@@ -28,5 +29,5 @@ local Layers={
 local function sorted()
  local out={};for i,l in ipairs(Layers) do out[i]=l end;table.sort(out,function(a,b)return a.priority<b.priority end);return out
 end
-RegisterCommand('svlayers',function()print('[SilvaVision] ===== VISUAL LAYERS MEGA 27 =====');for _,l in ipairs(sorted()) do print(('[SilvaVision] %02d | %s | %s'):format(l.priority,l.name,l.owner))end;print('[SilvaVision] Streetlight/corona/emissive seguem bloqueados até validação real.')end,false)
+RegisterCommand('svlayers',function()print('[SilvaVision] ===== VISUAL LAYERS MEGA 29 =====');for _,l in ipairs(sorted()) do print(('[SilvaVision] %02d | %s | %s'):format(l.priority,l.name,l.owner))end;print('[SilvaVision] Streetlight/corona/emissive seguem bloqueados até validação real.')end,false)
 exports('GetVisualLayers',sorted)
