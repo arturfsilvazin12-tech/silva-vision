@@ -1,4 +1,4 @@
--- SILVA VISION V0.5 MEGA BLOCK 26
+-- SILVA VISION V0.5 MEGA BLOCK 27
 -- Visual Layer Registry — CLIENT ONLY.
 -- Prioridade explícita; somente Central Apply escreve VisualSettings.
 
@@ -19,7 +19,8 @@ local Layers={
  {name='EMERGENCY_SCENE',priority=25,owner='core/client/visual_emergency_scene.lua'},
  {name='EMERGENCY_CONTRAST',priority=25,owner='core/client/visual_emergency_contrast.lua'},
  {name='VISUAL_COMPOSER',priority=26,owner='core/client/visual_composer.lua'},
- {name='PROFILE_DIRECTOR',priority=27,owner='core/client/visual_profile_director.lua'},
+ {name='FINAL_FUSION',priority=27,owner='core/client/visual_final_fusion.lua'},
+ {name='PROFILE_DIRECTOR',priority=28,owner='core/client/visual_profile_director.lua'},
  {name='CENTRAL_APPLY',priority=30,owner='core/client/visual_apply.lua'},
  {name='RUNTIME_STATE',priority=40,owner='core/client/*runtime.lua'},
  {name='RESHADE',priority=50,owner='ReShade'},
@@ -27,5 +28,5 @@ local Layers={
 local function sorted()
  local out={};for i,l in ipairs(Layers) do out[i]=l end;table.sort(out,function(a,b)return a.priority<b.priority end);return out
 end
-RegisterCommand('svlayers',function()print('[SilvaVision] ===== VISUAL LAYERS MEGA 26 =====');for _,l in ipairs(sorted()) do print(('[SilvaVision] %02d | %s | %s'):format(l.priority,l.name,l.owner))end;print('[SilvaVision] Streetlight/corona/emissive seguem bloqueados até validação real.')end,false)
+RegisterCommand('svlayers',function()print('[SilvaVision] ===== VISUAL LAYERS MEGA 27 =====');for _,l in ipairs(sorted()) do print(('[SilvaVision] %02d | %s | %s'):format(l.priority,l.name,l.owner))end;print('[SilvaVision] Streetlight/corona/emissive seguem bloqueados até validação real.')end,false)
 exports('GetVisualLayers',sorted)
