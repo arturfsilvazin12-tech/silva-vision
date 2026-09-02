@@ -1,6 +1,6 @@
--- SILVA VISION V0.5 MEGA BLOCK 21
+-- SILVA VISION V0.5 MEGA BLOCK 23
 -- Profile Director — CLIENT ONLY / STATE ONLY.
--- Sugere intensidade contextual sem substituir seleção manual.
+-- Sugere perfil contextual sem substituir seleção manual.
 
 local Director={enabled=true,interval=1000,state={recommended='Balanced',reason='default',confidence=0.0,lastRecommended='Balanced',stable=0}}
 local function call(name,...)
@@ -18,9 +18,11 @@ local function tick()
  elseif s.night and s.night>0.55 then target='Quality';reason='night'
  elseif s.cinematic and s.cinematic>0.60 then target='Cinematic';reason='cinematic'
  elseif s.wet and s.wet>0.55 then target='Quality';reason='wet' end
- local stable=target==Director.state.lastRecommended and Director.state.stable+1 or 0
+ local previous=Director.state.lastRecommended
+ local stable=target==previous and Director.state.stable+1 or 0
  Director.state.lastRecommended=target;Director.state.stable=math.min(stable,10);Director.state.recommended=target;Director.state.reason=reason
- local targetConfidence=math.min(1.0,0.25+Director.state.stable*0.075);Director.state.confidence=smooth(Director.state.confidence,targetConfidence,0.20)
+ local targetConfidence=(target==previous) and math.min(1.0,0.25+Director.state.stable*0.075) or 0.25
+ Director.state.confidence=smooth(Director.state.confidence,targetConfidence,0.20)
 end
 CreateThread(function()Wait(8500);while true do tick();Wait(Director.interval)end end)
 RegisterCommand('svprofilerec',function(_,a)if a[1]=='on'then Director.enabled=true elseif a[1]=='off'then Director.enabled=false elseif a[1]=='show'or not a[1]then print(('[SilvaVision] recommended=%s reason=%s confidence=%.2f stable=%d'):format(Director.state.recommended,Director.state.reason,Director.state.confidence,Director.state.stable));return else print('[SilvaVision] svprofilerec on | off | show');return end;print('[SilvaVision] Profile Director '..(Director.enabled and 'ON' or 'OFF'))end,false)
