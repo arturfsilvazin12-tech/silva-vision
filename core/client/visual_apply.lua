@@ -1,4 +1,4 @@
--- SILVA VISION V0.5 MEGA BLOCK 09
+-- SILVA VISION V0.5 MEGA BLOCK 11
 -- CENTRAL VISUAL APPLY - unica camada que escreve VisualSettings validados.
 
 local Apply={enabled=true,interval=1000,lastStateKey='',lastProfile='',lastMultiplier=1.0,writes=0}
@@ -15,11 +15,12 @@ end
 local function apply()
  if not Apply.enabled then return false end
  local s=call('GetVisualPolicy') or {};local profiles=call('GetProfiles') or {};local name=s.profile or 'Balanced';local p=profiles[name] or profiles.Balanced;if not p then return false end
- local budget=call('GetVisualBudget') or {multiplier=1.0,tier='NATIVE'};local adapter=call('GetVisualBudgetAdapter') or {multiplier=1.0}
- local mult=clamp((tonumber(budget.multiplier) or 1.0)*(tonumber(adapter.multiplier) or 1.0),0.72,1.0)
- local ctx=call('GetVisualContextBridge') or {};local finish=call('GetVisualFinishState') or {};local trans=call('GetVisualTransitionState') or {}
+ local budget=call('GetVisualBudget') or {multiplier=1.0,tier='NATIVE'};local adapter=call('GetVisualBudgetAdapter') or {}
+ -- O Adapter espelha o Budget; usar ambos multiplicados causava penalização dupla.
+ local mult=clamp(tonumber(adapter.multiplier) or tonumber(budget.multiplier) or 1.0,0.72,1.0)
+ local ctx=call('GetVisualContextBridge') or {};local finish=call('GetVisualFinishState') or {};local trans=call('GetVisualTransitionState') or {};local weatherFinish=call('GetWeatherFinishState') or {}
  local nightF=clamp(tonumber(finish.night) or tonumber(trans.night) or tonumber(ctx.night) or 0,0,1)
- local wetF=clamp(tonumber(finish.wet) or tonumber(trans.wet) or 0,0,1);local stormF=clamp(tonumber(finish.storm) or tonumber(trans.storm) or 0,0,1)
+ local wetF=clamp(tonumber(finish.wet) or tonumber(trans.wet) or tonumber(weatherFinish.wet) or 0,0,1);local stormF=clamp(tonumber(finish.storm) or tonumber(trans.storm) or tonumber(weatherFinish.storm) or 0,0,1)
  local emergencyF=clamp(tonumber(finish.emergency) or 0,0,1);local interior=s.interior==true;local night=s.phase=='night';local wet=s.wet==true;local storm=s.weather=='THUNDER';local emergency=s.emergency==true
  local distant=clamp((p.distantSize or 1.05)*mult+nightF*0.08,0.90,1.20)
  local reflection=clamp((p.distantReflection or 0.85)*mult+wetF*0.10+stormF*0.02,0.70,1.00)
@@ -31,5 +32,5 @@ local function apply()
  Apply.lastProfile=name;Apply.lastMultiplier=mult;Apply.lastStateKey=table.concat({s.phase or '?',s.weather or '?',tostring(wet),tostring(interior),tostring(emergency),name,budget.tier or '?'},'|');return true
 end
 CreateThread(function()Wait(4500);while true do apply();Wait(Apply.interval)end end)
-RegisterCommand('svapply',function(_,args)local c=args[1];if c=='on' then Apply.enabled=true;apply()elseif c=='off' then Apply.enabled=false elseif c=='reapply' then apply()elseif c=='show' or not c then print(('[SilvaVision] apply=%s profile=%s budget=%.2f tier=%s writes=%d'):format(tostring(Apply.enabled),Apply.lastProfile,Apply.lastMultiplier,(call('GetVisualBudget') or {}).tier or '?',Apply.writes));return else print('[SilvaVision] svapply on | off | reapply | show');return end end,false)
+RegisterCommand('svapply',function(_,args)local c=args[1];if c=='on' then Apply.enabled=true;apply()elseif c=='off' then Apply.enabled=false elseif c=='reapply' then apply()elseif c=='show' or not c then print(('[SilvaVision] apply=%s profile=%s budget=%.2f tier=%s writes=%d'):format(tostring(Apply.enabled),Apply.lastProfile,Apply.lastMultiplier,(call('GetVisualBudget') or {}).tier or '?',Apply.writes));return else print('[SilvaVision] apply on | off | reapply | show');return end end,false)
 exports('ApplyVisualSettings',apply);exports('GetVisualApplyState',function()return Apply end)
