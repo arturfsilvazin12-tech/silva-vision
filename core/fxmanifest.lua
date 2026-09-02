@@ -3,8 +3,8 @@ game 'gta5'
 
 name 'silva-vision-core'
 author 'Silva Vision'
-description 'Silva Vision V0.5 Mega Block 25 client visual runtime layer'
-version '0.5.0-dev-mega-block-25'
+description 'Silva Vision V0.5 Mega Block 26 client visual runtime layer'
+version '0.5.0-dev-mega-block-26'
 
 client_scripts {
     'client/client_only_guard.lua',
@@ -16,7 +16,6 @@ client_scripts {
     'client/visual_profiles.lua',
     'client/visual_budget.lua',
     'client/visual_budget_adapter.lua',
-    'client/visual_apply.lua',
     'client/visual_runtime.lua',
     'client/timecycle_runtime.lua',
     'client/visual_director.lua',
@@ -28,17 +27,21 @@ client_scripts {
     'client/visual_scene_director.lua',
     'client/visual_sun_cycle.lua',
     'client/visual_weather_blend.lua',
+    'client/visual_weather_fx.lua',
+    'client/visual_surface_response.lua',
+    'client/visual_atmosphere_director.lua',
     'client/visual_emergency_scene.lua',
+    'client/visual_emergency_contrast.lua',
     'client/visual_exposure_guard.lua',
     'client/visual_reflection_director.lua',
     'client/visual_lighting_balance.lua',
     'client/visual_light_governor.lua',
-    'client/visual_weather_fx.lua',
     'client/visual_night_core.lua',
     'client/visual_vehicle_material.lua',
     'client/visual_tunnel_atmosphere.lua',
     'client/visual_composer.lua',
     'client/visual_profile_director.lua',
+    'client/visual_apply.lua',
     'client/lighting_runtime.lua',
     'client/lighting_director.lua',
     'client/weather_director.lua',
