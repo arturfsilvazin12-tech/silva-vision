@@ -4,7 +4,7 @@ game 'gta5'
 name 'silva-vision-core'
 author 'Silva Vision'
 description 'Silva Vision V0.5 Mega Block client visual runtime layer'
-version '0.5.0-dev-mega-block-12'
+version '0.5.0-dev-mega-block-18'
 
 client_scripts {
     'client/client_only_guard.lua',
@@ -37,6 +37,7 @@ client_scripts {
     'client/emergency_lighting.lua',
     'client/vfx_runtime.lua',
     'client/master_director.lua',
+    'client/runtime_integrity.lua',
     'client/white_lights_validator.lua',
     'client/visual_debug.lua',
     'client/visual_status.lua'
