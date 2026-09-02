@@ -1,4 +1,4 @@
--- SILVA VISION V0.5 MEGA BLOCK 23
+-- SILVA VISION V0.5 MEGA BLOCK 24
 -- Visual Layer Registry — CLIENT ONLY.
 -- Prioridade explícita; somente Central Apply escreve VisualSettings.
 
@@ -11,6 +11,9 @@ local Layers={
  {name='WEATHER_FX',priority=25,owner='core/client/visual_weather_fx.lua'},
  {name='REFLECTION_DIRECTOR',priority=25,owner='core/client/visual_reflection_director.lua'},
  {name='LIGHT_GOVERNOR',priority=25,owner='core/client/visual_light_governor.lua'},
+ {name='NIGHT_CORE',priority=25,owner='core/client/visual_night_core.lua'},
+ {name='VEHICLE_MATERIAL',priority=25,owner='core/client/visual_vehicle_material.lua'},
+ {name='TUNNEL_ATMOSPHERE',priority=25,owner='core/client/visual_tunnel_atmosphere.lua'},
  {name='VISUAL_COMPOSER',priority=26,owner='core/client/visual_composer.lua'},
  {name='PROFILE_DIRECTOR',priority=27,owner='core/client/visual_profile_director.lua'},
  {name='CENTRAL_APPLY',priority=30,owner='core/client/visual_apply.lua'},
