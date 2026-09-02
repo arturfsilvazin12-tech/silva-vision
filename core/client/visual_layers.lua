@@ -1,4 +1,4 @@
--- SILVA VISION V0.5 MEGA BLOCK 24
+-- SILVA VISION V0.5 MEGA BLOCK 25
 -- Visual Layer Registry — CLIENT ONLY.
 -- Prioridade explícita; somente Central Apply escreve VisualSettings.
 
@@ -23,5 +23,5 @@ local Layers={
 local function sorted()
  local out={};for i,l in ipairs(Layers) do out[i]=l end;table.sort(out,function(a,b)return a.priority<b.priority end);return out
 end
-RegisterCommand('svlayers',function()print('[SilvaVision] ===== VISUAL LAYERS =====');for _,l in ipairs(sorted()) do print(('[SilvaVision] %02d | %s | %s'):format(l.priority,l.name,l.owner))end;print('[SilvaVision] Pending streetlight/corona/emissive settings remain blocked until validation.')end,false)
+RegisterCommand('svlayers',function()print('[SilvaVision] ===== VISUAL LAYERS MEGA 25 =====');for _,l in ipairs(sorted()) do print(('[SilvaVision] %02d | %s | %s'):format(l.priority,l.name,l.owner))end;print('[SilvaVision] Streetlight/corona/emissive seguem bloqueados até validação real.')end,false)
 exports('GetVisualLayers',sorted)
